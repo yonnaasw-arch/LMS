@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Primary Palette - Trust and Stability (Blues) */
-  --primary: #0047AB;
-  --primary-hover: #003087;
-  --primary-light: #E6EEFA;
-
-  /* Secondary Palette - Professionalism (Greys) */
-  --bg-main: #F8FAFC;
+  /* Lendfusion-inspired Palette */
+  --primary: #0A1B3D;
+  /* Deep Blue Sidebar */
+  --accent: #2563EB;
+  /* Metric numbers and active states */
+  --bg-main: #F4F7F9;
+  /* Very light blue-grey background */
   --bg-card: #FFFFFF;
-  --border: #E2E8F0;
-  --text-main: #1E293B;
-  --text-muted: #64748B;
+  --border: #E8EEF2;
+  /* Thin, subtle border */
+  --text-main: #2D3748;
+  --text-muted: #718096;
 
   /* Status Colors */
   --success: #10B981;
@@ -20,16 +21,15 @@
   --info: #3B82F6;
 
   /* Layout */
-  --sidebar-width: 260px;
-  --header-height: 70px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --sidebar-width: 240px;
+  --header-height: 56px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -180,54 +180,61 @@ p {
 }
 
 .sidebar-logo {
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  letter-spacing: 1px;
+  color: #fff;
 }
 
 .logo-subtext {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  font-weight: 500;
+  font-size: 0.65rem;
+  color: #718096;
+  margin-top: 2px;
 }
 
 .sidebar-nav {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   flex: 1;
 }
 
-.nav-section {
-  padding: 1.5rem 1.5rem 0.5rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  opacity: 0.5;
-  letter-spacing: 0.05rem;
-}
-
 .nav-item {
-  padding: 0.75rem 1.5rem;
-  display: block;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  color: #CBD5E0;
+  font-size: 0.85rem;
   font-weight: 500;
   transition: all 0.2s;
+  text-decoration: none;
+  gap: 0.75rem;
 }
 
 .nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
   color: white;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .nav-item.active {
-  background-color: rgba(255, 255, 255, 0.2);
   color: white;
-  border-left: 4px solid white;
+  background-color: #1A365D;
+  /* Slightly lighter blue for active item */
+}
+
+.nav-icon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.chevron {
+  margin-left: auto;
+  font-size: 1.1rem;
+  opacity: 0.4;
 }
 
 .main-container {

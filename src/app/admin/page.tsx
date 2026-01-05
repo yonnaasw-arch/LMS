@@ -1,181 +1,248 @@
 "use client";
 
+import React from 'react';
+
 export default function AdminDashboard() {
   const metrics = [
-    { label: 'Total Issued Loan Value', value: '$840,250.00', trend: '+12% from last month', color: 'primary' },
-    { label: 'Outstanding Principal', value: '$562,400.00', trend: 'Active Portfolio', color: 'info' },
-    { label: 'Overdue Exposure', value: '$24,150.00', trend: '4.2% Risk Rate', color: 'error' },
-    { label: 'Monthly Cash Inflow', value: '$48,200.00', trend: 'Jan 2026', color: 'success' },
-  ];
-
-  const recentAlerts = [
-    { type: 'Overdue', message: 'Loan LN-7721 (Mercy K.) is 5 days overdue.', date: '2h ago' },
-    { type: 'Application', message: 'New Mortgage application from Solomon T.', date: '4h ago' },
-    { type: 'Reconciliation', message: 'Daily bank batch (15 transactions) processed.', date: '1d ago' },
+    { label: 'Pending applicants', value: '2', type: 'normal' },
+    { label: 'Referred applicants', value: '1', type: 'normal' },
+    { label: 'Unresolved tasks', value: '2', type: 'normal' },
+    { label: 'Draft loans', value: '1', type: 'normal' },
+    { label: 'Overdue loans', value: '16', type: 'danger' },
+    { label: 'Total overdue sum', value: '€25,431,535.51', type: 'danger' },
+    { label: 'Overdue by 90d+', value: '15 / €25,431,313.29', type: 'danger' },
+    { label: 'Active loans', value: '21', type: 'info' },
+    { label: 'Outstanding items', value: '23', type: 'info' },
+    { label: 'Active sum', value: '€41,343,927.81', type: 'info' },
+    { label: 'Total sum issued', value: '€45,618,927.81', type: 'info' },
   ];
 
   return (
-    <div className="admin-container">
+    <div className="admin-dashboard-v2">
       <header className="page-header">
-        <h1>Operations Dashboard</h1>
-        <p>Real-time visibility into lending operations and financial health.</p>
+        <h1>Dashboard</h1>
+        <div className="breadcrumb">Main » Dashboard</div>
       </header>
 
-      <div className="metrics-grid">
-        {metrics.map(metric => (
-          <div key={metric.label} className="card stat-card">
-            <span className="stat-label">{metric.label}</span>
-            <span className={`stat-value color-${metric.color}`}>{metric.value}</span>
-            <span className="stat-trend">{metric.trend}</span>
+      {/* Metric Cards Grid */}
+      <div className="metric-cards-container">
+        {metrics.map((m, i) => (
+          <div key={i} className={`metric-card ${m.type}`}>
+            <div className="metric-label">{m.label}</div>
+            <div className="metric-value">{m.value}</div>
           </div>
         ))}
       </div>
 
-      <div className="admin-grid">
-        <section className="dashboard-section main">
-          <div className="section-header">
-            <h2>Portfolio Distribution</h2>
+      <div className="dashboard-charts-grid">
+        {/* Cashflow Chart Card */}
+        <section className="chart-card">
+          <div className="chart-header">
+            <h3>Cashflow (last month)</h3>
+            <button className="edit-icon">✎</button>
           </div>
-          <div className="card distribution-card">
-            <div className="chart-placeholder">
-              <div className="bar-group">
-                <div className="label">Active</div>
-                <div className="bar" style={{ width: '70%', background: 'var(--success)' }}>70%</div>
-              </div>
-              <div className="bar-group">
-                <div className="label">Overdue</div>
-                <div className="bar" style={{ width: '15%', background: 'var(--error)' }}>15%</div>
-              </div>
-              <div className="bar-group">
-                <div className="label">Completed</div>
-                <div className="bar" style={{ width: '10%', background: 'var(--info)' }}>10%</div>
-              </div>
-              <div className="bar-group">
-                <div className="label">Cancelled</div>
-                <div className="bar" style={{ width: '5%', background: 'var(--text-muted)' }}>5%</div>
-              </div>
+          <div className="chart-content">
+            <div className="mock-bar-chart">
+              {/* Simplified mock bars to represent weeks */}
+              {[60, 40, 80, 50, 90].map((h, i) => (
+                <div key={i} className="bar-group">
+                  <div className="bar inflow" style={{ height: `${h}%` }}></div>
+                  <div className="bar outflow" style={{ height: `${h * 0.6}%` }}></div>
+                </div>
+              ))}
+            </div>
+            <div className="chart-legend">
+              <span className="legend-item"><span className="dot inflow"></span> Inflow</span>
+              <span className="legend-item"><span className="dot outflow"></span> Outflow</span>
             </div>
           </div>
         </section>
 
-        <aside className="dashboard-section secondary">
-          <div className="section-header">
-            <h2>Risk Alerts</h2>
+        {/* Applications Chart Card */}
+        <section className="chart-card">
+          <div className="chart-header">
+            <h3>Applications (last month)</h3>
+            <button className="edit-icon">✎</button>
           </div>
-          <div className="card alerts-card">
-            <div className="alerts-list">
-              {recentAlerts.map((alert, i) => (
-                <div key={i} className="alert-item">
-                  <span className={`alert-badge ${alert.type.toLowerCase()}`}>{alert.type}</span>
-                  <div className="alert-content">
-                    <p className="alert-msg">{alert.message}</p>
-                    <span className="alert-date">{alert.date}</span>
-                  </div>
+          <div className="chart-content">
+            <div className="mock-stacked-chart">
+              {[70, 45, 90, 65, 85].map((h, i) => (
+                <div key={i} className="stacked-bar">
+                  <div className="segment s1" style={{ height: '20%' }}></div>
+                  <div className="segment s2" style={{ height: '30%' }}></div>
+                  <div className="segment s3" style={{ height: '25%' }}></div>
+                  <div className="segment s4" style={{ height: '15%' }}></div>
+                  <div className="segment s5" style={{ height: '10%' }}></div>
                 </div>
               ))}
             </div>
+            <div className="chart-legend wrap">
+              <span className="legend-item"><span className="dot s1"></span> New</span>
+              <span className="legend-item"><span className="dot s2"></span> Returning</span>
+              <span className="legend-item"><span className="dot s3"></span> Accepted</span>
+              <span className="legend-item"><span className="dot s4"></span> Rejected</span>
+              <span className="legend-item"><span className="dot s5"></span> Pending</span>
+            </div>
           </div>
-        </aside>
+        </section>
       </div>
 
       <style jsx global>{`
-        .admin-container {
-          display: flex;
-          flex-direction: column;
-          gap: 2.5rem;
-        }
-
-        .metrics-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .stat-value.color-primary { color: var(--primary); }
-        .stat-value.color-info { color: var(--info); }
-        .stat-value.color-error { color: var(--error); }
-        .stat-value.color-success { color: var(--success); }
-
-        .admin-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: 2rem;
-        }
-
-        .chart-placeholder {
+        .admin-dashboard-v2 {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
         }
 
-        .bar-group {
+        .breadcrumb {
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          margin-top: -0.25rem;
+          margin-bottom: 1rem;
+        }
+
+        .metric-cards-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+          gap: 1rem;
+        }
+
+        .metric-card {
+          background: var(--bg-card);
+          padding: 1rem;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
           display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .metric-label {
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          text-transform: capitalize;
+        }
+
+        .metric-value {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--accent);
+        }
+
+        .metric-card.danger .metric-value {
+          color: var(--error);
+        }
+
+        .dashboard-charts-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 1.5rem;
+          margin-top: 1rem;
+        }
+
+        .chart-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem;
+        }
+
+        .chart-header {
+          display: flex;
+          justify-content: space-between;
           align-items: center;
-          gap: 1.5rem;
+          margin-bottom: 2rem;
         }
 
-        .bar-group .label {
-          width: 80px;
-          font-size: 0.85rem;
+        .chart-header h3 {
+          font-size: 1rem;
           font-weight: 600;
         }
 
-        .bar {
-          height: 30px;
-          border-radius: 4px;
-          display: flex;
-          align-items: center;
-          padding-left: 10px;
-          color: white;
-          font-size: 0.75rem;
-          font-weight: 700;
+        .edit-icon {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          opacity: 0.5;
         }
 
-        .alerts-list {
+        .chart-content {
+          height: 250px;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          justify-content: space-between;
         }
 
-        .alert-item {
+        .mock-bar-chart, .mock-stacked-chart {
+          flex: 1;
           display: flex;
-          gap: 1rem;
-          align-items: flex-start;
+          align-items: flex-end;
+          gap: 1.5rem;
           padding-bottom: 1rem;
           border-bottom: 1px solid var(--border);
         }
 
-        .alert-item:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
+        .bar-group {
+          flex: 1;
+          display: flex;
+          align-items: flex-end;
+          gap: 4px;
+          height: 100%;
         }
 
-        .alert-badge {
-          font-size: 0.65rem;
-          text-transform: uppercase;
-          font-weight: 800;
-          padding: 0.2rem 0.5rem;
-          border-radius: 4px;
-          white-space: nowrap;
+        .bar {
+          flex: 1;
+          border-radius: 2px 2px 0 0;
         }
 
-        .alert-badge.overdue { background: #FEE2E2; color: #991B1B; }
-        .alert-badge.application { background: #DBEAFE; color: #1E40AF; }
-        .alert-badge.reconciliation { background: #D1FAE5; color: #065F46; }
+        .bar.inflow { background: #3B82F6; }
+        .bar.outflow { background: #A78BFA; }
 
-        .alert-msg {
-          font-size: 0.85rem;
-          font-weight: 500;
-          margin-bottom: 0.25rem;
+        .stacked-bar {
+          flex: 1;
+          display: flex;
+          flex-direction: column-reverse;
+          height: 100%;
         }
 
-        .alert-date {
+        .segment { width: 100%; }
+        .segment.s1 { background: #3B82F6; }
+        .segment.s2 { background: #A78BFA; }
+        .segment.s3 { background: #10B981; }
+        .segment.s4 { background: #F87171; }
+        .segment.s5 { background: #FBBF24; }
+
+        .chart-legend {
+          display: flex;
+          gap: 1.5rem;
+          padding-top: 1rem;
           font-size: 0.75rem;
           color: var(--text-muted);
         }
 
-        @media (max-width: 1000px) {
-          .admin-grid {
+        .chart-legend.wrap { flex-wrap: wrap; gap: 1rem; }
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+        }
+
+        .dot.inflow { background: #3B82F6; }
+        .dot.outflow { background: #A78BFA; }
+        .dot.s1 { background: #3B82F6; }
+        .dot.s2 { background: #A78BFA; }
+        .dot.s3 { background: #10B981; }
+        .dot.s4 { background: #F87171; }
+        .dot.s5 { background: #FBBF24; }
+
+        @media (max-width: 600px) {
+          .dashboard-charts-grid {
             grid-template-columns: 1fr;
           }
         }
