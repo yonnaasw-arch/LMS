@@ -1,3 +1,5 @@
+"use client";
+
 export default function Home() {
   return (
     <div className="home-dashboard">
@@ -10,43 +12,42 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="product-grid" style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '2rem',
-        marginTop: '2rem'
-      }}>
-        <div className="product-card card">
-          <h3>Mortgage Loans</h3>
-          <p>Long-term financing secured by real estate assets.</p>
-          <ul style={{ marginTop: '1rem', listStyle: 'none', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            <li>✓ Secured by real estate</li>
-            <li>✓ Long-term repayment</li>
-            <li>✓ Competitive rates</li>
-          </ul>
+      <div className="flex gap-4" style={{ marginTop: '2rem' }}>
+        <div className="card product-card" style={{ flex: 1 }}>
+          <span className="badge info">Product</span>
+          <h3>Mortgage</h3>
+          <p>Long-term secured lending for real estate acquisition.</p>
         </div>
-
-        <div className="product-card card">
-          <h3>Personal Loans</h3>
-          <p>Unsecured short-to-medium term loans for individuals.</p>
-          <ul style={{ marginTop: '1rem', listStyle: 'none', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            <li>✓ No collateral required</li>
-            <li>✓ Guaranteed by third-party</li>
-            <li>✓ Fast approval process</li>
-          </ul>
+        <div className="card product-card" style={{ flex: 1 }}>
+          <span className="badge info">Product</span>
+          <h3>Personal Loan</h3>
+          <p>Unsecured credit for individuals based on credit profile.</p>
         </div>
-
-        <div className="product-card card">
-          <h3>Business Loans</h3>
-          <p>Revenue-based lending for merchants and SMEs.</p>
-          <ul style={{ marginTop: '1rem', listStyle: 'none', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            <li>✓ Cash-flow analysis</li>
-            <li>✓ Flexible repayment</li>
-            <li>✓ SME focused</li>
-          </ul>
+        <div className="card product-card" style={{ flex: 1 }}>
+          <span className="badge info">Product</span>
+          <h3>Business Loan</h3>
+          <p>Revenue-based financing for SME growth and operations.</p>
         </div>
       </div>
 
+      <style jsx>{`
+        .welcome-banner {
+          background: linear-gradient(135deg, white 0%, var(--primary-light) 100%);
+          padding: 3rem 2rem;
+          border-left: 5px solid var(--primary);
+        }
+        .product-card {
+          transition: transform 0.2s, box-shadow 0.2s;
+          cursor: pointer;
+        }
+        .product-card:hover {
+          transform: translateY(-5px);
+          box-shadow: var(--shadow-md);
+        }
+        .product-card h3 {
+          margin-top: 1rem;
+        }
+      `}</style>
     </div>
   );
 }

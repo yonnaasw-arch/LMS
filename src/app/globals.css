@@ -312,3 +312,67 @@ p {
   margin-bottom: 0.5rem;
   color: var(--primary);
 }
+
+/* Dashboard Global Styles */
+.table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th {
+  padding: 1rem 1.5rem;
+  background: #fcfcfc;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  color: var(--text-muted);
+}
+
+.data-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge.success {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.badge.warning {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.badge.error {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+.badge.info {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
